@@ -1,0 +1,67 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AccessCredentialsObject {
+  access: String!
+}
+
+input CreateFileInput {
+  content: String!
+  mimetype: String!
+  name: String!
+}
+
+type FileObject {
+  id: String!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  login(credentials: LoginUserInput!): AccessCredentialsObject!
+
+  """
+  Saves user data to redis and sends verification email with token in URL.
+         User is saved to DB only after verification.
+         Token ttl is 15 minutes.
+         Optional avatar supports images in base64 string
+  """
+  register(avatar: CreateFileInput, credentials: RegisterUserInput!): Boolean!
+}
+
+type Query {
+  getMe: UserObject!
+}
+
+input RegisterUserInput {
+  about: String
+  email: String!
+  instagram: String
+  password: String!
+  skills: [String!]
+  software: [String!]
+  telegram: String
+  username: String!
+  whatsapp: String
+}
+
+type UserLinksObject {
+  instagram: String
+  telegram: String
+  whatsapp: String
+}
+
+type UserObject {
+  about: String
+  avatar: FileObject!
+  email: String!
+  id: String!
+  links: UserLinksObject
+  name: String!
+  skills: [String!]
+  software: [String!]
+}
